@@ -1,0 +1,80 @@
+<h4>Template-Driven Forms: Example 1</h4>
+<div class="well well-lg">
+
+  <form #exampleForm="ngForm" class="form-horizontal" novalidate>
+    <div [hidden]="submitted">
+
+      <div class="form-group" [ngClass]="{'has-error': hasErrors(firstName)}">
+        <label for="firstName" class="control-label col-sm-3">
+          <span style="color:red">* </span>First Name:</label>
+        <div class="col-sm-6">
+          <input class="form-control" type="text" id="firstName" name="firstName" [(ngModel)]="person.firstName" #firstName="ngModel"
+            minlength="2" maxlength="15" required placeholder="Required" dir-letter-only>
+          <small *ngIf="hasErrors(firstName)" class="help-block">
+            <span *ngIf="firstName.errors.required">First Name is required.</span>
+            <span *ngIf="firstName.errors.minlength">First Name must be at least 2 characters long.</span>
+            <span *ngIf="firstName.errors.maxlength">First Name cannot exceed 15 characters.</span>
+            <span *ngIf="firstName.errors.letterOnly">{{ firstName.errors.letterOnly }}</span>
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error': hasErrors(lastName)}">
+        <label for="lastName" class="control-label col-sm-3">
+          <span style="color:red">* </span>Last Name:</label>
+        <div class="col-sm-6">
+          <input class="form-control" type="text" id="lastName" name="lastName" [(ngModel)]="person.lastName" #lastName="ngModel" minlength="2"
+            maxlength="15" required placeholder="Required" dir-letter-only>
+          <small *ngIf="hasErrors(lastName)" class="help-block">
+            <span *ngIf="lastName.errors.required">Last Name is required.</span>
+            <span *ngIf="lastName.errors.minlength">Last Name must be at least 2 characters long.</span>
+            <span *ngIf="lastName.errors.maxlength">Last Name cannot exceed 15 characters.</span>
+            <span *ngIf="lastName.errors.letterOnly">{{ lastName.errors.letterOnly }}</span>
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error': hasErrors(middleInitial)}">
+        <label for="middleInitial" class="control-label col-sm-3">Middle Initial:</label>
+        <div class="col-sm-4">
+          <input class="form-control" type="text" id="middleInitial" name="middleInitial" [(ngModel)]="person.middleInitial" #middleInitial="ngModel"
+            maxlength="1" placeholder="Optional" dir-letter-only>
+          <small *ngIf="hasErrors(middleInitial)" class="help-block">
+            <span *ngIf="middleInitial.errors.maxlength">Middle Initial must be 1 character long.</span>
+            <span *ngIf="middleInitial.errors.letterOnly">{{ middleInitial.errors.letterOnly }}</span>
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error': hasErrors(gender)}">
+        <label for="gender" class="control-label col-sm-3">
+          <span style="color:red">* </span>Gender:</label>
+        <div class="col-sm-4">
+          <select id="gender" name="gender" class="form-control" [(ngModel)]="person.gender" #gender="ngModel" required>
+            <option value="">Select One</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+          <small *ngIf="hasErrors(gender)" class="help-block">
+            <span *ngIf="gender.errors.required">Gender is required.</span>
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="button" class="btn btn-default" (click)="resetForm(exampleForm)">Reset</button>
+          <button type="button" class="btn btn-primary" (click)="submitForm(exampleForm)">Submit</button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+  <div *ngIf="submitted">
+    <label>You've submitted!</label>
+    <pre>{{ exampleForm.value | json }}</pre>
+    <button type="button" class="btn btn-default" (click)="resetForm(exampleForm)">Add New</button>
+  </div>
+  
+</div>
