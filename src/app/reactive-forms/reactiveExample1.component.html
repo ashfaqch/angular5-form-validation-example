@@ -1,7 +1,7 @@
 <h4>Reactive Forms: Example 1</h4>
 <div class="well well-lg">
 
-  <form [formGroup]="exampleForm">
+  <form [formGroup]="exampleForm" (ngSubmit)="submitForm(exampleForm)">
     <div [hidden]="submitted">
 
       <div class="form-group row" [ngClass]="{'has-error': hasErrors('firstName')}">
@@ -63,7 +63,7 @@
 
       <div class="form-group">
         <button type="button" class="btn btn-default" (click)="resetForm(exampleForm)">Reset</button>
-        <button type="button" class="btn btn-primary" (click)="submitForm(exampleForm)">Submit</button>
+        <button type="submit" class="btn btn-primary" (click)="submitForm(exampleForm)">Submit</button>
       </div>
 
     </div>
